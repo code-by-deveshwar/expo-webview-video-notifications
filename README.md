@@ -1,50 +1,35 @@
-# Welcome to your Expo app 👋
+# Expo WebView + Notifications + HLS Video Player
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This Expo Router app embeds a web experience, schedules rich local notifications, and streams HLS video with custom controls. It is built with Expo SDK 54, `react-native-webview`, `expo-av`, and `expo-notifications`.
 
-## Get started
+## Features
+- WebView screen renders `https://expo.dev` with a loading overlay and two notification buttons (3s and 5s delays).
+- Local notifications request permissions on demand, configure an Android channel, and support foreground banners, sound, and tap handling.
+- Tapping the “Reminder” notification deep-links straight into the video screen.
+- Video screen streams HLS using `expo-av`, surfaces play/pause, skip, mute, and fullscreen controls, and clamps seeking within the available duration.
+- Users can switch between three predefined HLS streams without leaving the page.
+- Gradient-driven UI, glassmorphism cards, and typography tuned for production-ready polish.
+- Stack navigation via Expo Router (`/`, `/webview`, `/video`) with safe-area support.
 
-1. Install dependencies
+## Bonus Highlights
+1. WebView triggers a “loaded” notification after the first successful load.
+2. Reminder notification opens the video player when tapped, even from the notification tray.
+3. Custom playback controls (play/pause, ±10s seek, mute, fullscreen) replace native controls.
+4. Stream selector lets you toggle between multiple HLS sources.
 
-   ```bash
-   npm install
-   ```
+## Project Structure
+- `app/index.tsx` – Home screen hero card & entry point.
+- `app/webview.tsx` – Embedded site + notifications with premium container UI.
+- `app/video.tsx` – HLS player with custom controls and stream switcher.
+- `app/_layout.tsx` – Navigation stack and notification response handling.
+- `src/utils/notifications.ts` – Notification helper + Android channel configuration.
 
-2. Start the app
+## Getting Started
+1. Install dependencies: `npm install`
+2. Launch the dev server: `npx expo start`
+3. Scan the QR code with Expo Go (or run on iOS/Android simulator). Accept notification permissions when prompted.
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Testing Tips
+- Tap each notification button and confirm banners appear after the expected delay.
+- Background the app, tap the “Reminder” notification, and verify you land on the video screen.
+- Switch between streams and exercise the custom controls (mute, seek, fullscreen) to confirm responsiveness.
